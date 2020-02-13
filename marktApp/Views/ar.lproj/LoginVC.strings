@@ -1,0 +1,27 @@
+
+/* Class = "UITextField"; placeholder = "username"; ObjectID = "5zr-1r-eFN"; */
+"5zr-1r-eFN.placeholder" = "اسم المستخدم";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "9FO-3P-1YY"; */
+"9FO-3P-1YY.placeholder" = "كلمة المرور";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "G72-Uu-ZLb"; */
+"G72-Uu-ZLb.normalTitle" = "تسجيل الدخول";
+
+/* Class = "UILabel"; text = "Wellcome"; ObjectID = "GNr-vU-YPN"; */
+"GNr-vU-YPN.text" = "مرحباً بك";
+
+/* Class = "UILabel"; text = "No account?"; ObjectID = "Sls-Hb-UUP"; */
+"Sls-Hb-UUP.text" = "ليس لديك حساب؟";
+
+/* Class = "UIButton"; normalTitle = "Are you forget the password?"; ObjectID = "Sx3-0O-AeV"; */
+"Sx3-0O-AeV.normalTitle" = "هل نسيت كلمة المرور؟";
+
+/* Class = "UILabel"; text = "Please, login to continue."; ObjectID = "djz-T6-dvc"; */
+"djz-T6-dvc.text" = "للمتابعة سجل الدخول";
+
+/* Class = "UIButton"; normalTitle = "create account."; ObjectID = "esz-ss-OfN"; */
+"esz-ss-OfN.normalTitle" = "إنشاء حساب";
+
+/* Class = "UIButton"; normalTitle = "skip Login"; ObjectID = "yqz-e8-KH1"; */
+"yqz-e8-KH1.normalTitle" = "تخطي التسجيل";

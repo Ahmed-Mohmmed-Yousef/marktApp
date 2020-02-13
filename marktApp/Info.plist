@@ -58,5 +58,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Tajawal-Bold.ttf</string>
+		<string>Tajawal-Medium.ttf</string>
+		<string>Tajawal-Regular.ttf</string>
+	</array>
 </dict>
 </plist>

@@ -77,7 +77,7 @@
                                                 <rect key="frame" x="87.5" y="578" width="200" height="45"/>
                                                 <color key="backgroundColor" red="0.90761679409999996" green="0.86083585019999997" blue="0.34100973610000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="Or5-uo-0fr"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Or5-uo-0fr"/>
                                                     <constraint firstAttribute="height" constant="45" id="xuy-Hq-azc"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
@@ -176,11 +176,13 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="0ob-rL-qdQ" secondAttribute="trailing" constant="16" id="77e-R5-xZA"/>
                                             <constraint firstItem="nre-Mg-L2P" firstAttribute="leading" secondItem="0ob-rL-qdQ" secondAttribute="leading" id="7IW-ti-O37"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Sx3-0O-AeV" secondAttribute="trailing" constant="10" id="7lW-Iv-Vy4"/>
                                             <constraint firstItem="djz-T6-dvc" firstAttribute="leading" secondItem="GNr-vU-YPN" secondAttribute="leading" id="8GA-As-mZs"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GNr-vU-YPN" secondAttribute="trailing" constant="20" id="8Yx-bl-Z7Z"/>
                                             <constraint firstItem="Sx3-0O-AeV" firstAttribute="leading" secondItem="nre-Mg-L2P" secondAttribute="leading" id="8cX-eS-OB3"/>
                                             <constraint firstItem="GNr-vU-YPN" firstAttribute="top" secondItem="4ZO-cn-iFT" secondAttribute="top" id="G4h-mW-PW9"/>
                                             <constraint firstItem="G72-Uu-ZLb" firstAttribute="top" secondItem="Sx3-0O-AeV" secondAttribute="bottom" constant="15" id="JgP-xf-3Ge"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="djz-T6-dvc" secondAttribute="trailing" constant="10" id="Ntv-Uz-p9s"/>
                                             <constraint firstAttribute="trailing" secondItem="G72-Uu-ZLb" secondAttribute="trailing" constant="20" id="OEh-ix-l6O"/>
                                             <constraint firstItem="djz-T6-dvc" firstAttribute="top" secondItem="GNr-vU-YPN" secondAttribute="bottom" constant="19.5" id="ONU-CV-FCI"/>
                                             <constraint firstItem="4ZO-cn-iFT" firstAttribute="top" secondItem="PMh-sg-w12" secondAttribute="top" constant="50" id="Rkz-KB-AOy"/>
