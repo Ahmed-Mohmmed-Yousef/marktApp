@@ -13,6 +13,8 @@
 		248545F023F57D9100014B34 /* Tajawal-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 248545ED23F57D9100014B34 /* Tajawal-Medium.ttf */; };
 		248545F123F57D9100014B34 /* Tajawal-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 248545EE23F57D9100014B34 /* Tajawal-Bold.ttf */; };
 		248545F223F57D9100014B34 /* Tajawal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 248545EF23F57D9100014B34 /* Tajawal-Regular.ttf */; };
+		248545F523F5A0E500014B34 /* PhoneNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248545F423F5A0E500014B34 /* PhoneNumberVC.swift */; };
+		248545F723F5B6FA00014B34 /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248545F623F5B6FA00014B34 /* String+Extention.swift */; };
 		248DDA5E23EA770E000F60ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248DDA5D23EA770E000F60ED /* AppDelegate.swift */; };
 		248DDA6023EA770E000F60ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248DDA5F23EA770E000F60ED /* SceneDelegate.swift */; };
 		248DDA6223EA770E000F60ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248DDA6123EA770E000F60ED /* ViewController.swift */; };
@@ -32,6 +34,8 @@
 		248545ED23F57D9100014B34 /* Tajawal-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tajawal-Medium.ttf"; sourceTree = "<group>"; };
 		248545EE23F57D9100014B34 /* Tajawal-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tajawal-Bold.ttf"; sourceTree = "<group>"; };
 		248545EF23F57D9100014B34 /* Tajawal-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tajawal-Regular.ttf"; sourceTree = "<group>"; };
+		248545F423F5A0E500014B34 /* PhoneNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberVC.swift; sourceTree = "<group>"; };
+		248545F623F5B6FA00014B34 /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
 		248DDA5A23EA770E000F60ED /* marktApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = marktApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		248DDA5D23EA770E000F60ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		248DDA5F23EA770E000F60ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			children = (
 				248DDA6123EA770E000F60ED /* ViewController.swift */,
 				248DDA8323F14BA6000F60ED /* LoginVC.swift */,
+				248545F423F5A0E500014B34 /* PhoneNumberVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				248545B923F169EC00014B34 /* UIView+Extention.swift */,
+				248545F623F5B6FA00014B34 /* String+Extention.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -228,6 +234,8 @@
 				248DDA5E23EA770E000F60ED /* AppDelegate.swift in Sources */,
 				248545BA23F169EC00014B34 /* UIView+Extention.swift in Sources */,
 				248DDA8423F14BA6000F60ED /* LoginVC.swift in Sources */,
+				248545F523F5A0E500014B34 /* PhoneNumberVC.swift in Sources */,
+				248545F723F5B6FA00014B34 /* String+Extention.swift in Sources */,
 				248DDA6023EA770E000F60ED /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,13 +31,21 @@ extension UIView{
         layer.shadowOpacity = 0.2
         layer.masksToBounds = false
 
-//        layer.shadowColor = UIColor.black.cgColor
-//        layer.shadowOpacity = 1
-//        layer.shadowOffset = .zero
-        
-//        layer.shadowRadius = 10
-//        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-//        layer.shouldRasterize = true
-//        layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func setValidInput(){
+        layer.shadowColor = UIColor.green.cgColor
+        layer.shadowOffset = CGSize(width: 2, height: 3)
+        layer.shadowRadius = 2
+        layer.shadowOpacity = 0.2
+        layer.masksToBounds = false
+    }
+    
+    func setErrorInput(){
+        layer.shadowColor = UIColor.red.cgColor
+        layer.shadowOffset = CGSize(width: 2, height: 3)
+        layer.shadowRadius = 2
+        layer.shadowOpacity = 0.2
+        layer.masksToBounds = false
     }
 }
