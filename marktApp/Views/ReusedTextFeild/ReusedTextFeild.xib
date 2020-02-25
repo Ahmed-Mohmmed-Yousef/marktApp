@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReusedTextFeild" customModule="marktApp" customModuleProvider="target">
+            <connections>
+                <outlet property="ImageView" destination="Bk2-ov-rUG" id="coS-Cl-0CT"/>
+                <outlet property="button" destination="fq9-h7-IW8" id="moa-ZN-ADo"/>
+                <outlet property="containerView" destination="WnO-dW-uzC" id="r9C-Fh-eTe"/>
+                <outlet property="textFeild" destination="R1F-cp-QUb" id="qSN-5x-5th"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="479" height="126"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnO-dW-uzC">
+                    <rect key="frame" x="0.0" y="0.0" width="479" height="126"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1F-cp-QUb">
+                            <rect key="frame" x="38" y="0.0" width="403" height="126"/>
+                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="10"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.slash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-ov-rUG">
+                            <rect key="frame" x="4" y="50.5" width="30" height="25.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="2xw-m6-noy"/>
+                                <constraint firstAttribute="width" constant="30" id="E4v-JT-ctC"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fq9-h7-IW8">
+                            <rect key="frame" x="445" y="48" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="WrO-hH-bSS"/>
+                                <constraint firstAttribute="height" constant="30" id="xij-Hl-HIh"/>
+                            </constraints>
+                            <state key="normal" image="square.and.arrow.up.on.square.fill" catalog="system"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Bk2-ov-rUG" firstAttribute="centerY" secondItem="R1F-cp-QUb" secondAttribute="centerY" id="1O7-bN-Dff"/>
+                        <constraint firstItem="Bk2-ov-rUG" firstAttribute="leading" secondItem="WnO-dW-uzC" secondAttribute="leading" constant="4" id="Qcs-QV-vhs"/>
+                        <constraint firstItem="R1F-cp-QUb" firstAttribute="leading" secondItem="Bk2-ov-rUG" secondAttribute="trailing" constant="4" id="VOQ-ri-SeR"/>
+                        <constraint firstItem="fq9-h7-IW8" firstAttribute="leading" secondItem="R1F-cp-QUb" secondAttribute="trailing" constant="4" id="WKI-Y3-DvR"/>
+                        <constraint firstAttribute="trailing" secondItem="fq9-h7-IW8" secondAttribute="trailing" constant="4" id="dRT-tF-GKj"/>
+                        <constraint firstAttribute="bottom" secondItem="R1F-cp-QUb" secondAttribute="bottom" id="ehy-lo-w5g"/>
+                        <constraint firstItem="R1F-cp-QUb" firstAttribute="top" secondItem="WnO-dW-uzC" secondAttribute="top" id="wHn-XX-XOz"/>
+                        <constraint firstItem="fq9-h7-IW8" firstAttribute="centerY" secondItem="R1F-cp-QUb" secondAttribute="centerY" id="ynV-t2-Guk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="WnO-dW-uzC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YVa-xD-gAy"/>
+                <constraint firstAttribute="bottom" secondItem="WnO-dW-uzC" secondAttribute="bottom" id="bCN-2j-JJM"/>
+                <constraint firstItem="WnO-dW-uzC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qZO-Uc-FwO"/>
+                <constraint firstItem="WnO-dW-uzC" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="rDx-1E-M8Q"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="68.840579710144937" y="90.401785714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pencil.slash" catalog="system" width="64" height="56"/>
+        <image name="square.and.arrow.up.on.square.fill" catalog="system" width="58" height="64"/>
+    </resources>
+</document>
