@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol HomeControllerDelegate {
+    func handleMenuToggle(forMenuOption menuOption: MenuOption?)
+}
+
 class HomeVC: UIViewController {
+    
+    var delegate: HomeControllerDelegate?
     
      var characters = ["Link", "Zelda", "Ganondorf", "Midna"]
     
@@ -48,6 +54,12 @@ class HomeVC: UIViewController {
         tb.translatesAutoresizingMaskIntoConstraints = false
         return tb
     }()
+    
+    let cartBarBtn: UIBarButtonItem = {
+        let barBtn = UIBarButtonItem(image: UIImage(named: "carts"), style: .plain, target: self, action: #selector(CartBarBtnPressed))
+        barBtn.tintColor = .white
+        return barBtn
+    }()
 
     var authController = AuthController()
     
@@ -55,8 +67,8 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSideMinue()
-        setIcon()
+        setupNavBar()
+        CartBarBtnPressed()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,22 +76,22 @@ class HomeVC: UIViewController {
     }
     
     // set water icon in nav bar
-    func setIcon(){
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
-        imageView.contentMode = .scaleAspectFit
-        let image = UIImage(named: "water")
-        imageView.image = image
-        navigationItem.titleView = imageView
+    @objc func CartBarBtnPressed(){
+        // MARK:  Go to Shopping Cart
     }
     
     // set side minue
-    func setupSideMinue(){
-        let image = UIImage(named: "person")
+    func setupNavBar(){
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.875915885, green: 0.1924651265, blue: 0.2923229039, alpha: 1)
         navigationController?.navigationBar.barStyle = .black
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = cartBarBtn
+        navigationItem.title = "Side Menu"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenu))
     }
     
-    
+    @objc func handleMenu(){
+        delegate?.handleMenuToggle(forMenuOption: nil)
+    }
    
     // MARK:~ content view setup
     func setupContentView(){
@@ -88,7 +100,7 @@ class HomeVC: UIViewController {
             .isActive = true
         contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
             .isActive = true
-        contentView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0)
+        contentView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 0.0)
             .isActive = true
         contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0)
             .isActive = true
@@ -110,10 +122,12 @@ class HomeVC: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
-        tableView.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 32).isActive = true
+        tableView.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 16).isActive = true
         tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        tableView.allowsSelection = true
+        
         tableView.register(CompanyCell.self, forCellReuseIdentifier: cellId)
     }
 
@@ -135,6 +149,14 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let slectedCompany = arrC[indexPath.row]
+        let vc = CompanyProductsVC()
+        vc.products = arrP
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     
 }

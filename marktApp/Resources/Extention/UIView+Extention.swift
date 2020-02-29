@@ -18,6 +18,7 @@ extension UIView{
     func circleCorner() {
         superview?.layoutIfNeeded()
         setCorner(radius: frame.height / 2)
+        clipsToBounds = true
     }
     
     func setBorder(width: CGFloat = 0.5, color: UIColor = .black) {
