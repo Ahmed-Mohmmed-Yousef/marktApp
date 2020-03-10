@@ -14,6 +14,8 @@ class ProductCell: UITableViewCell {
     var product: Product?{
         didSet{
             imgView.image = product?.Img
+            productName.text = product?.productName
+            productPrice.text = String(describing: product?.price ?? 00)
         }
     }
     
@@ -43,7 +45,7 @@ class ProductCell: UITableViewCell {
     let productPrice: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.setAvenirNext(with: .Medium, size: 20)
+        lbl.font = UIFont.setAvenirNext(with: .Medium, size: 18)
         lbl.text = "23.30 $"
         return lbl
     }()
@@ -51,7 +53,7 @@ class ProductCell: UITableViewCell {
     let numberOfOrder: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.setAvenirNext(with: .Regular, size: 20)
+        lbl.font = UIFont.setAvenirNext(with: .Regular, size: 18)
         lbl.text = "5 G"
         return lbl
     }()
@@ -59,7 +61,7 @@ class ProductCell: UITableViewCell {
     let productSize: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.setAvenirNext(with: .Regular, size: 20)
+        lbl.font = UIFont.setAvenirNext(with: .Regular, size: 18)
         lbl.text = "1 liter"
         return lbl
     }()
@@ -158,7 +160,7 @@ class ProductCell: UITableViewCell {
             orderBtn.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             orderBtn.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
             orderBtn.widthAnchor.constraint(equalToConstant: 175),
-            orderBtn.heightAnchor.constraint(equalToConstant: 50)
+            orderBtn.heightAnchor.constraint(equalToConstant: 40)
         ])
         orderBtn.setCorner()
     }

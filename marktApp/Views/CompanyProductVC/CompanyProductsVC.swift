@@ -78,5 +78,9 @@ extension CompanyProductsVC: UITableViewDelegate, UITableViewDataSource{
         return 200
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ProductDetailsVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }

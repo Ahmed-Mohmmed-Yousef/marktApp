@@ -31,6 +31,7 @@
 		248DDA8423F14BA6000F60ED /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248DDA8323F14BA6000F60ED /* LoginVC.swift */; };
 		249171862407BE7800D73FD7 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249171852407BE7800D73FD7 /* ProductCell.swift */; };
 		24917188240A2BAF00D73FD7 /* UIFont+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24917187240A2BAF00D73FD7 /* UIFont+Ext.swift */; };
+		2491718B240A5DE000D73FD7 /* ProductDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491718A240A5DE000D73FD7 /* ProductDetailsVC.swift */; };
 		24A4FB9623F6CB510058A3B9 /* ReusedTextFeild.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A4FB9523F6CB510058A3B9 /* ReusedTextFeild.xib */; };
 		24A4FB9823F6CE380058A3B9 /* ReusedTextFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4FB9723F6CE380058A3B9 /* ReusedTextFeild.swift */; };
 		24A4FB9B23F6D3A70058A3B9 /* UITextField+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4FB9A23F6D3A70058A3B9 /* UITextField+Extention.swift */; };
@@ -70,6 +71,7 @@
 		248DDA8323F14BA6000F60ED /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		249171852407BE7800D73FD7 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		24917187240A2BAF00D73FD7 /* UIFont+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Ext.swift"; sourceTree = "<group>"; };
+		2491718A240A5DE000D73FD7 /* ProductDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsVC.swift; sourceTree = "<group>"; };
 		24A4FB9523F6CB510058A3B9 /* ReusedTextFeild.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReusedTextFeild.xib; sourceTree = "<group>"; };
 		24A4FB9723F6CE380058A3B9 /* ReusedTextFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusedTextFeild.swift; sourceTree = "<group>"; };
 		24A4FB9A23F6D3A70058A3B9 /* UITextField+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extention.swift"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				24A4FBBD23FB1C5A0058A3B9 /* HomeVC */,
 				240B42DF2406DBE300485EE7 /* CompanyProductVC */,
 				24A4FB9923F6D0760058A3B9 /* ReusedTextFeild */,
+				24917189240A5D5F00D73FD7 /* ProductDetails */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,6 +176,14 @@
 				24917187240A2BAF00D73FD7 /* UIFont+Ext.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		24917189240A5D5F00D73FD7 /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				2491718A240A5DE000D73FD7 /* ProductDetailsVC.swift */,
+			);
+			path = ProductDetails;
 			sourceTree = "<group>";
 		};
 		24A4FB9923F6D0760058A3B9 /* ReusedTextFeild */ = {
@@ -327,6 +338,7 @@
 				240B42D524056FE300485EE7 /* ContainerController.swift in Sources */,
 				24917188240A2BAF00D73FD7 /* UIFont+Ext.swift in Sources */,
 				248545F723F5B6FA00014B34 /* String+Extention.swift in Sources */,
+				2491718B240A5DE000D73FD7 /* ProductDetailsVC.swift in Sources */,
 				248DDA6023EA770E000F60ED /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
