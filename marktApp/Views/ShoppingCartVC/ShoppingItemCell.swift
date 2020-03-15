@@ -1,31 +1,47 @@
 //
-//  ProductCell.swift
+//  ShoppingItemCell.swift
 //  marktApp
 //
-//  Created by Ahmed on 2/27/20.
+//  Created by Ahmed on 3/11/20.
 //  Copyright © 2020 Ahmed,ORG. All rights reserved.
 //
 
 import UIKit
 
-class ProductCell: UITableViewCell {
+protocol  ShoppingItemCellProtocol{
+    func numberOfItemChanged(indexPath: IndexPath, value:Int, completion: @escaping (Int) -> Void )
+    func deleteItem()
+    func showSpinner()
+    func removeSpinner()
+    
+}
 
+class ShoppingItemCell: UITableViewCell {
     // MARK: - Properties
-    var product: Product?{
+    var shoppingItem: ShoppingItem? {
         didSet{
-            imgView.image = product?.Img
-            productName.text = product?.productName
-            productPrice.text = String(describing: product?.price ?? 00)
+            if let product = shoppingItem?.product{
+                imgView.image           = product.Img
+                productName.text        = product.productName
+                productPrice.text       = "price: \(product.price) $"
+                productCompany.text     = "\(product.ownerCompany)"
+                numberOfOrder.text      = "count: \(shoppingItem?.count ?? 0)"
+                stepper.minimumValue    = Double(product.lowerBoundForOrder)
+            }
+            
         }
     }
     
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        return view
-    }()
+    var delegate: ShoppingItemCellProtocol?
+    var indexPath: IndexPath?
     
+    private lazy var containerView: UIView = {
+           let view = UIView()
+           view.translatesAutoresizingMaskIntoConstraints = false
+           view.backgroundColor = .white
+           return view
+       }()
+       
     private lazy var imgView: UIImageView = {
         let imgview = UIImageView()
         imgview.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +49,7 @@ class ProductCell: UITableViewCell {
         imgview.contentMode = .scaleAspectFit
         return imgview
     }()
-    
+       
     private lazy var productName: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -41,12 +57,19 @@ class ProductCell: UITableViewCell {
         lbl.font = UIFont.setAvenirNext(with: .Bold, size: 20)
         return lbl
     }()
-    
+       
     private lazy var productPrice: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .Medium, size: 18)
-        lbl.text = "23.30 $"
+        lbl.text = "Nova"
+        return lbl
+    }()
+    
+    private lazy var productCompany: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = UIFont.setAvenirNext(with: .Regular, size: 18)
         return lbl
     }()
     
@@ -54,45 +77,48 @@ class ProductCell: UITableViewCell {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .Regular, size: 18)
-        lbl.text = "5 G"
         return lbl
     }()
     
-    private lazy var productSize: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.setAvenirNext(with: .Regular, size: 18)
-        lbl.text = "1 liter"
-        return lbl
+    private lazy var stepper: UIStepper = {
+        let stepper = UIStepper()
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        return stepper
     }()
     
-    private lazy var orderBtn: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8999999762, blue: 0.8999999762, alpha: 1)
-        btn.setTitle("Add to the cart", for: .normal)
-        return btn
-    }()
-    
+
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        selectionStyle = .none
         setupContainerView()
         setupImgView()
         setupNameLbl()
         setupProductPrice()
+        setupProductCompanye()
         setupNumberOfOrder()
-        setupProductSize()
-        setupOrderBtn()
+        setupStepper()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-     // MARK: - Handlers
-    
+    @objc func stepperValueChanged(_ sender:UIStepper!)
+    {
+        let value = Int(sender.value)
+        
+        delegate?.showSpinner()
+        delegate?.numberOfItemChanged(indexPath: indexPath!, value: value){ [weak self] newValue in
+            guard let self = self else { return }
+            self.delegate?.removeSpinner()
+            self.numberOfOrder.text = "count: \(newValue)"
+            self.stepper.value = Double(newValue)
+            print("UIStepper is now \(self.stepper.value)")
+        }
+    }
     /// Setup content view  In View
     fileprivate func setupContainerView(){
         addSubview(containerView)
@@ -110,8 +136,8 @@ class ProductCell: UITableViewCell {
     fileprivate func setupImgView(){
         containerView.addSubview(imgView)
         NSLayoutConstraint.activate([
-            imgView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-            imgView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            imgView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            imgView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             imgView.widthAnchor.constraint(equalToConstant: 110.0),
             imgView.heightAnchor.constraint(equalToConstant: 110.0)
         ])
@@ -135,37 +161,30 @@ class ProductCell: UITableViewCell {
         ])
     }
     
+    fileprivate func setupProductCompanye(){
+        containerView.addSubview(productCompany)
+        NSLayoutConstraint.activate([
+           productCompany.topAnchor.constraint(equalTo: productPrice.bottomAnchor, constant: 4),
+           productCompany.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 8),
+        ])
+        
+    }
+    
     // setup Number Of Order
     fileprivate func setupNumberOfOrder(){
         containerView.addSubview(numberOfOrder)
         NSLayoutConstraint.activate([
-           numberOfOrder.topAnchor.constraint(equalTo: productPrice.bottomAnchor, constant: 4),
-           numberOfOrder.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 8),
-        ])
-    }
-
-    // setup product Size
-    fileprivate func setupProductSize(){
-        containerView.addSubview(productSize)
-        NSLayoutConstraint.activate([
-           productSize.topAnchor.constraint(equalTo: numberOfOrder.bottomAnchor, constant: 4),
-           productSize.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 8),
+           numberOfOrder.topAnchor.constraint(equalTo: productCompany.bottomAnchor, constant: 4),
+           numberOfOrder.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 8)
         ])
     }
     
-    // set oreder buttn
-    fileprivate func setupOrderBtn(){
-        containerView.addSubview(orderBtn)
+    fileprivate func setupStepper(){
+        containerView.addSubview(stepper)
         NSLayoutConstraint.activate([
-            orderBtn.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            orderBtn.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
-            orderBtn.widthAnchor.constraint(equalToConstant: 175),
-            orderBtn.heightAnchor.constraint(equalToConstant: 40)
+            stepper.topAnchor.constraint(equalTo: numberOfOrder.bottomAnchor, constant: 4),
+            stepper.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 8),
         ])
-        orderBtn.setCorner()
     }
     
-    @objc fileprivate func orderAction(){
-        
-    }
 }

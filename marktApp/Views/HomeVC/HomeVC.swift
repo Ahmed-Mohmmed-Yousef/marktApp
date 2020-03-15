@@ -55,38 +55,44 @@ class HomeVC: UIViewController {
         return tb
     }()
     
-    let cartBarBtn: UIBarButtonItem = {
-        let barBtn = UIBarButtonItem(image: UIImage(named: "carts"), style: .plain, target: self, action: #selector(CartBarBtnPressed))
-        barBtn.tintColor = .white
-        return barBtn
-    }()
+//    let cartBarBtn: UIBarButtonItem = {
+//        let barBtn = UIBarButtonItem(image: UIImage(named: "carts"), style: .plain, target: self, action: #selector(cartBarBtnPressed))
+//        barBtn.tintColor = .white
+//        return barBtn
+//    }()
 
     var authController = AuthController()
-    
     let cellId = "CompanyCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavBar()
-        CartBarBtnPressed()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        setupNavBar()
         checkLogin()
     }
     
-    // set water icon in nav bar
-    @objc func CartBarBtnPressed(){
-        // MARK:  Go to Shopping Cart
-    }
+    
     
     // set side minue
     func setupNavBar(){
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.875915885, green: 0.1924651265, blue: 0.2923229039, alpha: 1)
         navigationController?.navigationBar.barStyle = .black
-        navigationItem.rightBarButtonItem = cartBarBtn
+        navigationController?.navigationBar.tintColor = .white
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "carts")?.withTintColor(.white), style: .plain, target: self, action: #selector(cartBarBtnPressed))
         navigationItem.title = "Side Menu"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenu))
+    }
+    
+    // set water icon in nav bar
+    @objc func cartBarBtnPressed(){
+        // MARK:  Go to Shopping Cart
+        let vc = ShoppingCartVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func handleMenu(){
@@ -143,6 +149,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CompanyCell
         let currentLastItem = arrC[indexPath.row]
         cell.company = currentLastItem
+        cell.selectionStyle = .none
         return cell
     }
     
