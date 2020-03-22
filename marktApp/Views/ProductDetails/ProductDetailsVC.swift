@@ -15,7 +15,7 @@ class ProductDetailsVC: UIViewController {
         didSet{
             navigationItem.title = product?.productName
             navigationItem.titleView?.tintColor = .white
-            imgView.image = product?.Img
+            imgView.image = product?.img
             productName.text = product?.productName
             productPrice.text = "\(product?.price ?? 0.0) $"
             productSize.text = "\(product?.size ?? 0) liter"
@@ -23,28 +23,34 @@ class ProductDetailsVC: UIViewController {
         }
     }
     
-    let scrollView: UIScrollView = {
+    var isInShopCart = false {
+        didSet{
+            setOrderBtnStatus()
+        }
+    }
+    
+    private let scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.backgroundColor = .clear
         return sv
     }()
     
-    let containerView1: UIView = {
+    private let containerView1: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
     }()
     
-    let containerView2: UIView = {
+    private let containerView2: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
     }()
     
-    let imgView: UIImageView = {
+    private let imgView: UIImageView = {
         let imgview = UIImageView()
         imgview.translatesAutoresizingMaskIntoConstraints = false
         imgview.backgroundColor = .white
@@ -52,7 +58,7 @@ class ProductDetailsVC: UIViewController {
         return imgview
     }()
     
-    let productName: UILabel = {
+    private let productName: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "defualt product name"
@@ -60,7 +66,7 @@ class ProductDetailsVC: UIViewController {
         return lbl
     }()
     
-    let productPrice: UILabel = {
+    private let productPrice: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .Medium, size: 20)
@@ -68,7 +74,7 @@ class ProductDetailsVC: UIViewController {
         return lbl
     }()
     
-    let numberOfOrder: UILabel = {
+    private let numberOfOrder: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .Regular, size: 20)
@@ -76,7 +82,7 @@ class ProductDetailsVC: UIViewController {
         return lbl
     }()
     
-    let productSize: UILabel = {
+    private let productSize: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .Regular, size: 20)
@@ -84,7 +90,7 @@ class ProductDetailsVC: UIViewController {
         return lbl
     }()
     
-    let orderBtn: UIButton = {
+    private let orderBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8999999762, blue: 0.8999999762, alpha: 1)
@@ -94,7 +100,16 @@ class ProductDetailsVC: UIViewController {
         return btn
     }()
     
-    let productDetails: UILabel = {
+    private let imgv: UIImageView = {
+        let imgv = UIImageView()
+        imgv.backgroundColor = .clear
+        imgv.tintColor = .white
+        imgv.contentMode = .scaleAspectFit
+        imgv.translatesAutoresizingMaskIntoConstraints = false
+        return imgv
+    }()
+    
+    private let productDetails: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .Medium, size: 18)
@@ -107,7 +122,6 @@ class ProductDetailsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        product = arrP[0]
         view.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.968627451, alpha: 1)
 
         setupScrollView()
@@ -133,6 +147,14 @@ class ProductDetailsVC: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         scrollView.isScrollEnabled = true
+    }
+    
+    func setOrderBtnStatus(){
+        orderBtn.backgroundColor = isInShopCart ? #colorLiteral(red: 0.875915885, green: 0.1924651265, blue: 0.2923229039, alpha: 1) : #colorLiteral(red: 0.8980392157, green: 0.8999999762, blue: 0.8999999762, alpha: 1)
+        let btnTitle = isInShopCart ? "In Cart" : "Add to the cart"
+        let img = isInShopCart ? #imageLiteral(resourceName: "cart_minus") : #imageLiteral(resourceName: "cart_plus")
+        orderBtn.setTitle(btnTitle, for: .normal)
+        imgv.image = img
     }
     
     // set image view
@@ -207,10 +229,7 @@ class ProductDetailsVC: UIViewController {
             orderBtn.heightAnchor.constraint(equalToConstant: 50)
         ])
         orderBtn.setCorner()
-        let imgv = UIImageView(image: #imageLiteral(resourceName: "Image"))
-        imgv.backgroundColor = .clear
-        imgv.contentMode = .scaleAspectFit
-        imgv.translatesAutoresizingMaskIntoConstraints = false
+//        set image
         orderBtn.addSubview(imgv)
         NSLayoutConstraint.activate([
             imgv.topAnchor.constraint(equalTo: orderBtn.topAnchor, constant: 8),

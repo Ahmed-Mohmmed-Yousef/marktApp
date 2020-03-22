@@ -8,16 +8,29 @@
 
 import UIKit
 
+protocol ProductCellDelegat {
+    func addProductToCart(product: Product, completion: @escaping(Bool) -> Void)
+}
+
 class ProductCell: UITableViewCell {
 
     // MARK: - Properties
     var product: Product?{
         didSet{
-            imgView.image = product?.Img
+            imgView.image = product?.img
             productName.text = product?.productName
             productPrice.text = String(describing: product?.price ?? 00)
+            setOrderBtnStatus()
         }
     }
+    
+    var isInShopCart = false {
+        didSet{
+            setOrderBtnStatus()
+        }
+    }
+    
+    var delegate: ProductCellDelegat?
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -70,7 +83,7 @@ class ProductCell: UITableViewCell {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8999999762, blue: 0.8999999762, alpha: 1)
-        btn.setTitle("Add to the cart", for: .normal)
+        btn.addTarget(self, action: #selector(orderBtnAction), for: .touchUpInside)
         return btn
     }()
     
@@ -92,7 +105,17 @@ class ProductCell: UITableViewCell {
     }
     
      // MARK: - Handlers
+    @objc func orderBtnAction(){
+        delegate?.addProductToCart(product: product!){ success in
+            self.isInShopCart = success
+        }
+    }
     
+    func setOrderBtnStatus(){
+        orderBtn.backgroundColor = isInShopCart ? #colorLiteral(red: 0.875915885, green: 0.1924651265, blue: 0.2923229039, alpha: 1) : #colorLiteral(red: 0.8980392157, green: 0.8999999762, blue: 0.8999999762, alpha: 1)
+        let btnTitle = isInShopCart ? "In Cart" : "Add to the cart"
+        orderBtn.setTitle(btnTitle, for: .normal)
+    }
     /// Setup content view  In View
     fileprivate func setupContainerView(){
         addSubview(containerView)
@@ -165,7 +188,4 @@ class ProductCell: UITableViewCell {
         orderBtn.setCorner()
     }
     
-    @objc fileprivate func orderAction(){
-        
-    }
 }

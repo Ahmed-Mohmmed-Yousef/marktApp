@@ -9,19 +9,22 @@
 import UIKit
 
 class ShoppingCartVC: UIViewController, ShoppingCartProtocol, ShoppingItemCellProtocol {
+    
+    
 
     lazy var mainView: ShoppingCartView = {
         let view = ShoppingCartView(delegate: self)
         view.backgroundColor = .white
         return view
     }()
-    var shopItems = SC.shoppingItems
+    var shopItems: [ShoppingItem] = SC.shoppingItems
     lazy var spinner = SpinnerViewController()
     let cellId = "ShoppingItemCell"
     
     override func loadView() {
         super.loadView()
         view = mainView
+        self.navigationItem.title = "Shopping Cart"
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,33 +37,29 @@ class ShoppingCartVC: UIViewController, ShoppingCartProtocol, ShoppingItemCellPr
     
     
     func countTotalPrice() -> Double{
-        return SC.totalPrice
+        return SC.calcTotalPrice()
     }
     
     func showTotalPrice(){
         mainView.sumLbl.text = "\(countTotalPrice()) $"
     }
-    // MARK: - ShoppingCartProtocol
+    // MARK: - ShoppingCartProtocol and tableView
     func deleteAction() {
-        print("Delete")
+        let isEditing = self.mainView.tableView.isEditing
+        self.mainView.tableView.isEditing = !isEditing
+        self.mainView.deleteBarBtn?.image = UIImage(named: !isEditing ? "like" : "trash")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingCart.count
+        return SC.shoppingItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! ShoppingItemCell
-        let shopCart = shoppingCart[indexPath.row]
-        shopCart.valueChaned = {
-            print("value changed completon")
-        }
+        let shopCart = SC.shoppingItems[indexPath.row]
         cell.shoppingItem = shopCart
         cell.indexPath = indexPath
         cell.delegate = self
-        print(indexPath.row)
-        print(shoppingCart[indexPath.row].valueChaned ?? "nil")
-        print(shopCart.valueChaned ?? "nil")
         return cell
     }
     
@@ -68,21 +67,35 @@ class ShoppingCartVC: UIViewController, ShoppingCartProtocol, ShoppingItemCellPr
         return 200
     }
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let tempObjcMoved = SC.shoppingItems[sourceIndexPath.item]
+        SC.shoppingItems.remove(at: sourceIndexPath.item)
+        SC.shoppingItems.insert(tempObjcMoved, at: sourceIndexPath.item)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            SC.shoppingItems.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            // update totale price
+            showTotalPrice()
+        }
+    }
+    
+    
+
     // MARK: - ShoppingItemCellProtocol
-    func numberOfItemChanged(indexPath: IndexPath, value: Int, completion: @escaping (Int) -> Void) {
-        print(indexPath.row)
-        shopItems[indexPath.row].setCount(value: value){ [weak self] newValue in
+    func numberOfItemChanged(in item: ShoppingItem, value: Int, completion: @escaping (Int) -> Void) {
+        item.setCount(value: value){ [weak self] newValue in
             guard let self = self else {return}
             self.showTotalPrice()
             completion(newValue)
         }
-        
     }
     
-    
-    func deleteItem() {
-        
-    }
     
     func showSpinner() {
         addChild(spinner)

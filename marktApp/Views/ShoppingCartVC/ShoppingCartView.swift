@@ -16,11 +16,19 @@ import UIKit
 
 class ShoppingCartView: UIView{
     
+    private weak var delegate: ShoppingCartProtocol!
+    let cellId = "ShoppingItemCell"
+    
     private lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.8999999762, blue: 0.8999999762, alpha: 1)
         return view
+    }()
+    
+    var deleteBarBtn: UIBarButtonItem? = {
+        let barBtn = UIBarButtonItem()
+        return barBtn
     }()
     
     lazy var tableView: UITableView = {
@@ -57,9 +65,6 @@ class ShoppingCartView: UIView{
         return btn
     }()
     
-    private weak var delegate: ShoppingCartProtocol!
-    let cellId = "ShoppingItemCell"
-    
     init(delegate: ShoppingCartProtocol) {
         super.init(frame: .zero)
         self.delegate = delegate
@@ -85,7 +90,8 @@ class ShoppingCartView: UIView{
     
     func setupNavBar(){
         
-        delegate.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash")?.withTintColor(.white), style: .plain, target: delegate, action: #selector(delegate.deleteAction))
+        deleteBarBtn = UIBarButtonItem(image: UIImage(named: "trash")?.withTintColor(.white), style: .plain, target: delegate, action: #selector(delegate.deleteAction))
+        delegate.navigationItem.rightBarButtonItem = deleteBarBtn
     }
 //    
     func setupContainerView(){

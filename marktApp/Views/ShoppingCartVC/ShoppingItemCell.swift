@@ -9,8 +9,7 @@
 import UIKit
 
 protocol  ShoppingItemCellProtocol{
-    func numberOfItemChanged(indexPath: IndexPath, value:Int, completion: @escaping (Int) -> Void )
-    func deleteItem()
+    func numberOfItemChanged(in item: ShoppingItem, value:Int, completion: @escaping (Int) -> Void )
     func showSpinner()
     func removeSpinner()
     
@@ -21,14 +20,13 @@ class ShoppingItemCell: UITableViewCell {
     var shoppingItem: ShoppingItem? {
         didSet{
             if let product = shoppingItem?.product{
-                imgView.image           = product.Img
+                imgView.image           = product.img
                 productName.text        = product.productName
                 productPrice.text       = "price: \(product.price) $"
-                productCompany.text     = "\(product.ownerCompany)"
+//                productCompany.text     = "\(product.ownerCompany)"
                 numberOfOrder.text      = "count: \(shoppingItem?.count ?? 0)"
                 stepper.minimumValue    = Double(product.lowerBoundForOrder)
-            }
-            
+            }            
         }
     }
     
@@ -111,12 +109,11 @@ class ShoppingItemCell: UITableViewCell {
         let value = Int(sender.value)
         
         delegate?.showSpinner()
-        delegate?.numberOfItemChanged(indexPath: indexPath!, value: value){ [weak self] newValue in
+        delegate?.numberOfItemChanged(in: shoppingItem!, value: value){ [weak self] newValue in
             guard let self = self else { return }
             self.delegate?.removeSpinner()
             self.numberOfOrder.text = "count: \(newValue)"
             self.stepper.value = Double(newValue)
-            print("UIStepper is now \(self.stepper.value)")
         }
     }
     /// Setup content view  In View
@@ -125,6 +122,7 @@ class ShoppingItemCell: UITableViewCell {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            // MARK: ~ there is a problem
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])

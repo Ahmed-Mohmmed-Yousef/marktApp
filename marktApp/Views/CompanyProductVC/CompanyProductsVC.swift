@@ -10,7 +10,6 @@ import UIKit
 
 class CompanyProductsVC: UIViewController {
 
-    var products: [Product]?
     var company: Company?
     let cellId = "productCell"
     let tableView: UITableView = {
@@ -23,9 +22,9 @@ class CompanyProductsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem?.isEnabled = false
-
-        
+        navigationItem.title = "\(company?.name ?? "No Titel")"
         view.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.968627451, alpha: 1)
+        
         // navigation Item
         setupCartIcon()
         setupTableView()
@@ -39,7 +38,8 @@ class CompanyProductsVC: UIViewController {
     }
     
     @objc func CartBarBtnPressed(){
-        // MARK: Action when cart button pressed
+        let vc = ShoppingCartVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupTableView(){
@@ -64,13 +64,19 @@ class CompanyProductsVC: UIViewController {
 
 extension CompanyProductsVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrP.count
+        guard let company = company else { return 0 }
+        return company.products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! ProductCell
-        cell.product = arrP[indexPath.row]
         cell.selectionStyle = .none
+        if let company = company {
+            let product: Product = company.products[indexPath.row]
+            cell.product = product
+            cell.delegate = self
+            cell.isInShopCart = SC.isExiste(product: product)
+        }
         return cell
     }
     
@@ -79,8 +85,23 @@ extension CompanyProductsVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ProductDetailsVC()
-        navigationController?.pushViewController(vc, animated: true)
+        if let company = company {
+            let vc = ProductDetailsVC()
+            let product: Product = company.products[indexPath.row]
+            vc.product = product
+            vc.isInShopCart = SC.isExiste(product: product)
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+}
+
+
+extension CompanyProductsVC: ProductCellDelegat{
+    func addProductToCart(product: Product, completion: @escaping (Bool) -> Void) {
+        SC.addItem(product: product) { (success) in
+            completion(success)
+        }
     }
     
 }

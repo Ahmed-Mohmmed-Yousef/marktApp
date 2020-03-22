@@ -16,7 +16,7 @@ class HomeVC: UIViewController {
     
     var delegate: HomeControllerDelegate?
     
-     var characters = ["Link", "Zelda", "Ganondorf", "Midna"]
+    var companies: [Company] = API.getCompanies()
     
     let ContainerLoginView: UIView = {
         let ContainerView = UIView()
@@ -55,11 +55,7 @@ class HomeVC: UIViewController {
         return tb
     }()
     
-//    let cartBarBtn: UIBarButtonItem = {
-//        let barBtn = UIBarButtonItem(image: UIImage(named: "carts"), style: .plain, target: self, action: #selector(cartBarBtnPressed))
-//        barBtn.tintColor = .white
-//        return barBtn
-//    }()
+
 
     var authController = AuthController()
     let cellId = "CompanyCell"
@@ -83,13 +79,12 @@ class HomeVC: UIViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "carts")?.withTintColor(.white), style: .plain, target: self, action: #selector(cartBarBtnPressed))
-        navigationItem.title = "Side Menu"
+        navigationItem.title = "Water App"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenu))
     }
     
     // set water icon in nav bar
     @objc func cartBarBtnPressed(){
-        // MARK:  Go to Shopping Cart
         let vc = ShoppingCartVC()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -141,12 +136,12 @@ class HomeVC: UIViewController {
 // MARK:~ UITableViewDelegate, UITableViewDataSource
 extension HomeVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrC.count
+        return companies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CompanyCell
-        let currentLastItem = arrC[indexPath.row]
+        let currentLastItem = companies[indexPath.row]
         cell.company = currentLastItem
         cell.selectionStyle = .none
         return cell
@@ -157,13 +152,10 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let slectedCompany = arrC[indexPath.row]
         let vc = CompanyProductsVC()
-        vc.products = arrP
+        vc.company = companies[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
     
 }
 

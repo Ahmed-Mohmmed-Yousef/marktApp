@@ -8,40 +8,49 @@
 
 import UIKit
 
-struct Company {
+class Company {
+    static var mainId = 0
+    var id: Int
     let name: String
     let img: UIImage
+    var products: [Product] = [Product]()
+    init(name: String, img: UIImage) {
+        self.name = name
+        self.img = img
+        id = Company.mainId
+        Company.mainId += 1
+    }
 }
 
-struct Product {
+class Product {
+    private static var mainId = 0
+    var id: Int
     let productName: String
     let price: Double
     let lowerBoundForOrder: Int
     let size: Int
-    let ownerCompany: String
-    let Img: UIImage
+    let img: UIImage
     let discreption: String
+    
+    init(productName: String, price: Double, lowerBoundForOrder: Int, size: Int, Img: UIImage, discreption: String) {
+        self.productName = productName
+        self.price = price
+        self.lowerBoundForOrder = lowerBoundForOrder
+        self.size = size
+        self.img = Img
+        self.discreption = discreption
+        self.id = Product.mainId
+        Product.mainId += 1
+    }
+    
 }
 
 class ShoppingItem {
     let product: Product
-    private(set) var count: Int{
-        didSet{
-            if let chaned = valueChaned{
-                chaned()
-            }else{
-                print("nil value")
-            }
-        }
-    }
-    
+    private(set) var count: Int
     var totalPrice: Double {
         return Double(count) * product.price
     }
-    
-    var valueChaned:(() ->())?
-    
-    
     init(product: Product) {
         self.product = product
         self.count = product.lowerBoundForOrder
@@ -51,39 +60,75 @@ class ShoppingItem {
         count = value < product.lowerBoundForOrder ? product.lowerBoundForOrder : value
         completion(count)
     }
-    
-    
 }
 
-let nova    = Company(name: "Nova", img: #imageLiteral(resourceName: "novaWater"))
-let nestle  = Company(name: "Nestle", img: #imageLiteral(resourceName: "nestleWater"))
-let hellwa  = Company(name: "Hellwa", img: #imageLiteral(resourceName: "hilwaWater"))
-let berain  = Company(name: "Berain", img: #imageLiteral(resourceName: "perainWater"))
-let tania   = Company(name: "Tania", img: #imageLiteral(resourceName: "taniaWater"))
-let arrC    = [nova,nestle,hellwa,berain,tania]
-
-let p1 = Product(productName: "Nova Water", price: 23.0, lowerBoundForOrder: 3, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p2 = Product(productName: "Nova Water", price: 23.0, lowerBoundForOrder: 2, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p3 = Product(productName: "Nestle Water", price: 23.0, lowerBoundForOrder: 7, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bl ABCDEF\n ❤️😂😍😁🔥👍")
-let p4 = Product(productName: "Nestle Water", price: 23.0, lowerBoundForOrder: 2, size: 12, ownerCompany: "Nestl", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p5 = Product(productName: "Hellwa Water", price: 23.0, lowerBoundForOrder: 1, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p6 = Product(productName: "Hellwa Water", price: 23.0, lowerBoundForOrder: 9, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p7 = Product(productName: "Berain Water", price: 23.0, lowerBoundForOrder: 2, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p8 = Product(productName: "Berain Water", price: 23.0, lowerBoundForOrder: 8, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p9 = Product(productName: "Tania Water", price: 23.0, lowerBoundForOrder: 2, size: 12, ownerCompany: "Nova", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-let p10 = Product(productName: "Tania Water", price: 23.0, lowerBoundForOrder: 3, size: 12, ownerCompany: "Nestl", Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Bla Bla BlaBla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
-
-let arrP: [Product] = [p1,p2,p3,p4,p5,p6,p7,p8,p9,p10]
-var shoppingCart: [ShoppingItem] = [ShoppingItem(product: p1), ShoppingItem(product: p4)]
-
-
 class SC {
-    static var shoppingItems: [ShoppingItem] = [ShoppingItem(product: p1), ShoppingItem(product: p4)]
-    static var totalPrice: Double{
+    static var shoppingItems: [ShoppingItem] = []
+    
+    private init(){}
+    
+    static func calcTotalPrice() -> Double{
         var total = 0.0
         for item in shoppingItems {
             total += item.totalPrice
         }
         return total
     }
+    
+    static func addItem(product: Product, completion: @escaping(Bool) -> Void){
+        if isExiste(product: product){
+            let indx = shoppingItems.firstIndex{$0.product.id == product.id}!
+            shoppingItems.remove(at: indx)
+            completion(false)
+        } else {
+            let item = ShoppingItem(product: product)
+            shoppingItems.append(item)
+            completion(true)
+        }
+    }
+    
+    static func isExiste(product: Product) -> Bool{
+        return shoppingItems.contains{$0.product.id == product.id}
+    }
+    
 }
+
+class API{
+    private static var companies: [Company] = []
+    private static func initValues(){
+        let p1 = Product(productName: "Nova Water", price: 23.0, lowerBoundForOrder: 3, size: 3, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Nova Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p2 = Product(productName: "Nova Water", price: 23.0, lowerBoundForOrder: 2, size: 12, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Nova Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p3 = Product(productName: "Nestle Water", price: 23.0, lowerBoundForOrder: 7, size: 12, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Nestle Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bl ABCDEF\n ❤️😂😍😁🔥👍")
+        let p4 = Product(productName: "Nestle Water", price: 23.0, lowerBoundForOrder: 2, size: 9, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Nestle Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p5 = Product(productName: "Hellwa Water", price: 23.0, lowerBoundForOrder: 1, size: 12, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Hellwa Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p6 = Product(productName: "Hellwa Water", price: 23.0, lowerBoundForOrder: 9, size: 2, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Hellwa Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p7 = Product(productName: "Berain Water", price: 23.0, lowerBoundForOrder: 2, size: 5, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Berain Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p8 = Product(productName: "Berain Water", price: 23.0, lowerBoundForOrder: 8, size: 8, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Berain Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p9 = Product(productName: "Tania Water", price: 23.0, lowerBoundForOrder: 2, size: 14, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Tania Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let p10 = Product(productName: "Tania Water", price: 23.0, lowerBoundForOrder: 3, size: 6, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Tania Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
+        let nova    = Company(name: "Nova", img: #imageLiteral(resourceName: "novaWater"))
+        let nestle  = Company(name: "Nestle", img: #imageLiteral(resourceName: "nestleWater"))
+        let hellwa  = Company(name: "Hellwa", img: #imageLiteral(resourceName: "hilwaWater"))
+        let berain  = Company(name: "Berain", img: #imageLiteral(resourceName: "perainWater"))
+        let tania   = Company(name: "Tania", img: #imageLiteral(resourceName: "taniaWater"))
+        
+        nova.products   = [p1, p2]
+        nestle.products = [p3, p4]
+        hellwa.products = [p5, p6]
+        berain.products = [p7, p8]
+        tania.products  = [p9, p10]
+        
+        companies = [nova, nestle, hellwa, berain, tania]
+    }
+    
+    static func getCompanies() -> [Company]{
+        if companies.count == 0 {
+            initValues()
+        }
+        return companies
+    }
+    
+}
+
+
+
