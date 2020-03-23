@@ -93,7 +93,7 @@ class LoginVC: UIViewController {
     }
     
     func setSkipBtn(){
-         skipeLogin.addTarget(self, action: #selector(skipAction), for: .touchUpInside)
+        skipeLogin.addTarget(self, action: #selector(skipAction), for: .touchUpInside)
         skipeLogin.setCorner(radius: 10)
         skipeLogin.setShadow()
         
@@ -139,6 +139,7 @@ class LoginVC: UIViewController {
             }
             print("createAccountPreesed")
         }
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
 }

@@ -12,6 +12,7 @@ import UIKit
     var navigationItem: UINavigationItem { get }
     var navigationController: UINavigationController? { get }
     @objc func deleteAction()
+    @objc func continuAction()
 }
 
 class ShoppingCartView: UIView{
@@ -62,6 +63,7 @@ class ShoppingCartView: UIView{
         btn.titleLabel?.textColor = .white
         btn.setTitle("Contineu", for: .normal)
         btn.titleLabel?.font = UIFont.setAvenirNext(with: .Medium, size: 26.0)
+        btn.addTarget(delegate, action: #selector(delegate.continuAction), for: .touchUpInside)
         return btn
     }()
     

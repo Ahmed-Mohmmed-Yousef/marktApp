@@ -88,6 +88,7 @@ class OTPVC: UIViewController, UITextFieldDelegate {
                     }
                     print("continueAction 2")
                 }
+                vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)
             } else {
                 print("otp code not matched")

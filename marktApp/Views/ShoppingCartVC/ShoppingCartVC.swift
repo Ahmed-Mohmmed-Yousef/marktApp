@@ -10,8 +10,6 @@ import UIKit
 
 class ShoppingCartVC: UIViewController, ShoppingCartProtocol, ShoppingItemCellProtocol {
     
-    
-
     lazy var mainView: ShoppingCartView = {
         let view = ShoppingCartView(delegate: self)
         view.backgroundColor = .white
@@ -45,9 +43,18 @@ class ShoppingCartVC: UIViewController, ShoppingCartProtocol, ShoppingItemCellPr
     }
     // MARK: - ShoppingCartProtocol and tableView
     func deleteAction() {
-        let isEditing = self.mainView.tableView.isEditing
-        self.mainView.tableView.isEditing = !isEditing
-        self.mainView.deleteBarBtn?.image = UIImage(named: !isEditing ? "like" : "trash")
+        if SC.shoppingItems.count != 0 {
+            let isEditing = self.mainView.tableView.isEditing
+            self.mainView.tableView.isEditing = !isEditing
+            self.mainView.deleteBarBtn?.image = UIImage(named: !isEditing ? "like" : "trash")
+        }
+    }
+    
+    func continuAction() {
+        if SC.shoppingItems.count != 0 {
+            let vc = ShipsToVC()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

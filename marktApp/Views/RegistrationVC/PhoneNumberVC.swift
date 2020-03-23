@@ -71,6 +71,7 @@ class PhoneNumberVC: UIViewController {
                 }
                 print("continueAction")
             }
+            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
             //MARK: Alert phone number is`nt valid

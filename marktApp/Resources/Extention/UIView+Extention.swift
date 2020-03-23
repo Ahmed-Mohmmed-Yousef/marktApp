@@ -10,9 +10,8 @@ import UIKit
 
 extension UIView{
     func setCorner(radius: CGFloat = 10.0) {
-        self.layoutIfNeeded()
+//        self.layoutIfNeeded()
         self.layer.cornerRadius = radius
-//        self.clipsToBounds = true
     }
     
     func circleCorner() {

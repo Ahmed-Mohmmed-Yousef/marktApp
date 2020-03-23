@@ -178,41 +178,42 @@ extension HomeVC: LoginDelegate{
 
 
        /// login view
-       func setupLoginBtn(){
-           // ContainerView
-           view.addSubview(ContainerLoginView)
-           ContainerLoginView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0)
-               .isActive = true
-           ContainerLoginView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
-               .isActive = true
-           ContainerLoginView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0)
-               .isActive = true
-           ContainerLoginView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0)
-               .isActive = true
+    func setupLoginBtn(){
+        // ContainerView
+        view.addSubview(ContainerLoginView)
+        ContainerLoginView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0.0)
+            .isActive = true
+        ContainerLoginView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0)
+            .isActive = true
+        ContainerLoginView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0)
+            .isActive = true
+        ContainerLoginView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0)
+            .isActive = true
            
            // loginBtn
-           ContainerLoginView.addSubview(loginBtn)
-           loginBtn.centerYAnchor.constraint(equalTo: ContainerLoginView.centerYAnchor, constant: 0.0)
-               .isActive = true
-           loginBtn.centerXAnchor.constraint(equalTo: ContainerLoginView.centerXAnchor, constant: 0.0)
-               .isActive = true
-           loginBtn.widthAnchor.constraint(equalToConstant: 100)
-               .isActive = true
-           loginBtn.heightAnchor.constraint(equalToConstant: 40)
-               .isActive = true
-           loginBtn.setTitleColor(.white, for: .normal)
-           loginBtn.titleLabel?.font = UIFont(name: "Avenir Next", size: 30)
-           loginBtn.backgroundColor = .orange
-           loginBtn.setBorder()
-           loginBtn.setCorner()
-       }
+        ContainerLoginView.addSubview(loginBtn)
+        loginBtn.centerYAnchor.constraint(equalTo: ContainerLoginView.centerYAnchor, constant: 0.0)
+            .isActive = true
+        loginBtn.centerXAnchor.constraint(equalTo: ContainerLoginView.centerXAnchor, constant: 0.0)
+            .isActive = true
+        loginBtn.widthAnchor.constraint(equalToConstant: 100)
+            .isActive = true
+        loginBtn.heightAnchor.constraint(equalToConstant: 40)
+            .isActive = true
+        loginBtn.setTitleColor(.white, for: .normal)
+        loginBtn.titleLabel?.font = UIFont(name: "Avenir Next", size: 30)
+        loginBtn.backgroundColor = .orange
+        loginBtn.setBorder()
+        loginBtn.setCorner()
+    }
        
-       @objc func loginAction(){
-           let sb = UIStoryboard(name: "LoginVC", bundle: nil)
-           let vc = sb.instantiateInitialViewController() as! LoginVC
-           vc.delegat = self
-           present( vc, animated: true)
-       }
+    @objc func loginAction(){
+        let sb = UIStoryboard(name: "LoginVC", bundle: nil)
+        let vc = sb.instantiateInitialViewController() as! LoginVC
+        vc.modalPresentationStyle = .fullScreen
+        vc.delegat = self
+        present( vc, animated: true)
+    }
        
 }
 

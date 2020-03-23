@@ -25,7 +25,6 @@ class ReusedTextFeild: UIView {
         return false
     }
     
-    
     let nibName = "ReusedTextFeild"
     
     
