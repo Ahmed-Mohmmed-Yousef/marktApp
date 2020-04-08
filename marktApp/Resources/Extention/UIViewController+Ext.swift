@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIViewController {
-    func shoeAlert(msg: String, _ completion: (() -> ())?){
+    func showAlert(msg: String, _ completion: (() -> ())?){
         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel) { (alertAction) in
             completion?()

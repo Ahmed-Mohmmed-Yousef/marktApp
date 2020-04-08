@@ -42,20 +42,21 @@ class ReusableTextField: UIView {
     private func setupImagView(){
         addSubview(imgView)
         NSLayoutConstraint.activate([
-            imgView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imgView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10.0),
-            imgView.widthAnchor.constraint(equalToConstant: 24),
-            imgView.heightAnchor.constraint(equalToConstant: 24)
+            imgView.topAnchor.constraint(equalTo: topAnchor, constant: 4.0),
+            imgView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4.0),
+            imgView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8.0),
+            imgView.widthAnchor.constraint(equalToConstant: 30),
+            
         ])
     }
     
     private func setupTextField(){
         addSubview(textField)
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 10.0),
+            textField.leadingAnchor.constraint(equalTo: imgView.trailingAnchor, constant: 4.0),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10.0),
-            textField.topAnchor.constraint(equalTo: topAnchor, constant: 8.0),
-            textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8.0)
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 4.0),
+            textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4.0)
         ])
     }
     

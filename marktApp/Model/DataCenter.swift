@@ -61,9 +61,9 @@ class ShoppingItem {
         completion(count)
     }
 }
-
+let p1 = Product(productName: "Nova Water", price: 23.0, lowerBoundForOrder: 3, size: 3, Img: #imageLiteral(resourceName: "waterBottol"), discreption: "Nova Water Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ABCDEF\n ❤️😂😍😁🔥👍")
 class SC {
-    static var shoppingItems: [ShoppingItem] = []
+    static var shoppingItems: [ShoppingItem] = [ShoppingItem(product: p1), ShoppingItem(product: p1), ShoppingItem(product: p1)]
     
     private init(){}
     
@@ -127,6 +127,18 @@ class API{
         }
         return companies
     }
+    
+}
+
+class UserInfo {
+    static var name = "Ahmed Mohamed"
+    static var phone = "01141746591"
+    static var city = "Qena"
+    static var region = "Abnoud"
+    static var street = "El-Omda"
+    static var building = "#3"
+    static var floor = "#3"
+    static var location = "Egypt"
     
 }
 

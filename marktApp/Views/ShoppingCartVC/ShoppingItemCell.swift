@@ -85,12 +85,18 @@ class ShoppingItemCell: UITableViewCell {
         return stepper
     }()
     
+    lazy var tstView: UIView = {
+        var v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = .blue
+        return v
+    }()
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
         selectionStyle = .none
+        backgroundColor = .clear
         setupContainerView()
         setupImgView()
         setupNameLbl()
@@ -119,15 +125,16 @@ class ShoppingItemCell: UITableViewCell {
     /// Setup content view  In View
     fileprivate func setupContainerView(){
         addSubview(containerView)
+        containerView.setCorner()
+        containerView.setShadow()
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             // MARK: ~ there is a problem
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
-        containerView.setCorner()
-        containerView.setShadow()
+        
     }
     
     // Setup Image View In View
@@ -136,8 +143,8 @@ class ShoppingItemCell: UITableViewCell {
         NSLayoutConstraint.activate([
             imgView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
             imgView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            imgView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
             imgView.widthAnchor.constraint(equalToConstant: 110.0),
-            imgView.heightAnchor.constraint(equalToConstant: 110.0)
         ])
     }
     

@@ -9,7 +9,8 @@
 import UIKit
 
 @objc protocol ShipsToViewDelegate {
-   @objc func continuAction()
+    @objc func continuAction()
+    func openGetLocationVC()
 }
 class ShipsToView: UIView {
 
@@ -42,7 +43,7 @@ class ShipsToView: UIView {
         return constraint
     }()
     
-    lazy var reciverLbl: UILabel = {
+    private lazy var reciverLbl: UILabel = {
         var lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .DemiBold, size: 24.0)
@@ -50,7 +51,7 @@ class ShipsToView: UIView {
         return lbl
     }()
     
-    lazy var addressLbl: UILabel = {
+    private lazy var addressLbl: UILabel = {
         var lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.setAvenirNext(with: .DemiBold, size: 24.0)
@@ -58,14 +59,14 @@ class ShipsToView: UIView {
         return lbl
     }()
     
-    lazy var topContainerView: UIView = {
+    private lazy var topContainerView: UIView = {
         var v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .white
         return v
     }()
     
-    lazy var separateView: UIView = {
+    private lazy var separateView: UIView = {
         var v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .gray
@@ -139,6 +140,7 @@ class ShipsToView: UIView {
         rtf.translatesAutoresizingMaskIntoConstraints = false
         rtf.textField.textContentType = .location
         rtf.textField.placeholder = "Location *"
+        rtf.imgView.tintColor = .red
         rtf.imgView.image = #imageLiteral(resourceName: "location")
         return rtf
     }()
@@ -365,18 +367,21 @@ extension ShipsToView {
         setupContinueBtn()
     }
 }
+
 extension ShipsToView: UITextFieldDelegate{
-    
     //MARK:- text field Delegates
     func endEditing(){
         bottomConstrain.constant = -50
         endEditing(true)
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == locationRTF.textField {
+            delegate?.openGetLocationVC()
+        }
         bottomConstrain.constant = -300
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        endEditing()
+        endEditing(true)
         return true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
